@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject[] brickList;
     [SerializeField] GameObject bridge;
-    [SerializeField] Transform bridge1,bridge2;
+    [SerializeField] Transform bridge1,bridge2,bridge3;
     
     Vector3 floor1_origin = new Vector3(3, 0, 5);
     Vector3 floor2_origin = new Vector3(3, 20, 87);
@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
         PlaceBrick(floor2_origin);
         SpawnBridge(bridge1.position);
         SpawnBridge(bridge2.position);
+        SpawnBridge(bridge3.position);
     }
     private void Update()
     {
