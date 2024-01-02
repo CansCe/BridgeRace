@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
     {
         //move player using rigidbody
         rb.MovePosition(rb.position + nexPosition * speed * Time.fixedDeltaTime);
-        
     }
     //return the player's color
     public int getOwnColor()
@@ -60,18 +59,22 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("BridgeBrick"))
         {
-            Debug.Log("trigger");
-            if (numberBrickCollected > 0)
+            if (numberBrickCollected > 0 )
             {
                 numberBrickCollected--;
                 Debug.Log("Remaining " + numberBrickCollected);
-                Destroy(backBrickContainer.transform.GetChild(numberBrickCollected - 1).gameObject);
+                other.gameObject.GetComponent<BridgeBrick>().placed();
+                Destroy(backBrickContainer.transform.GetChild(numberBrickCollected).gameObject);
             }
             else if (numberBrickCollected == 0)
             {
-                if (nexPosition.z > 0)
+                Debug.Log("1");
+                if (nexPosition.z >= 0)
                 {
+                    Debug.Log("2");
                     nexPosition.z = 0;
+                    nexPosition.y = 0;
+                    Debug.Log(nexPosition);
                     return;
                 }
                 else

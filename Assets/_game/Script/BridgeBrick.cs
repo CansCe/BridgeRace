@@ -5,12 +5,9 @@ using UnityEngine;
 public class BridgeBrick : MonoBehaviour
 {
     [SerializeField] Material[] mats;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    int color;
+    public bool canBePlace = true;
+    
     void Update()
     {
         
@@ -21,9 +18,21 @@ public class BridgeBrick : MonoBehaviour
         {
             //active mesh renderer
             gameObject.GetComponent<MeshRenderer>().enabled = true;
-            int color = other.gameObject.GetComponent<PlayerController>().getOwnColor();
-            //aplly the color to the brick 
-            gameObject.GetComponent<MeshRenderer>().material = mats[color];
+            int playerColor= other.gameObject.GetComponent<PlayerController>().getOwnColor();
+            if(playerColor != color)
+            {
+                color = playerColor;
+                gameObject.GetComponent<MeshRenderer>().material = mats[color];
+            }
+            else
+            {
+                return;
+            }
         }
+    }
+
+    public void placed()
+    {
+        canBePlace = !canBePlace;
     }
 }
