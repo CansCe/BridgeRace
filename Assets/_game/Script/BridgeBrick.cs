@@ -8,17 +8,22 @@ public class BridgeBrick : MonoBehaviour
     int color;
     public bool canBePlace = true;
     
-    void Update()
-    {
-        
-    }
-    
     public void placed(int playerColor)
-    {
-        
-        gameObject.GetComponent<MeshRenderer>().enabled = true;
+    {   
+        //if the mesh renderer is disabled, enable it (this is for the first brick)
+        if (!gameObject.GetComponent<MeshRenderer>().enabled)
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = true;
+        }
         if (playerColor != color)
         {
+            color = playerColor;
+            gameObject.GetComponent<MeshRenderer>().material = mats[color];
+            canBePlace = !canBePlace;
+        }
+        else if (canBePlace == true && color != playerColor)
+        {
+            Debug.Log("Repaint");
             color = playerColor;
             gameObject.GetComponent<MeshRenderer>().material = mats[color];
             canBePlace = !canBePlace;

@@ -377,8 +377,9 @@
 "Assets/_game/Script/Brick.cs"
 "Assets/_game/Script/BridgeBrick.cs"
 "Assets/_game/Script/CameraScipt.cs"
+"Assets/_game/Script/Character's/BotController.cs"
+"Assets/_game/Script/Character's/PlayerController.cs"
 "Assets/_game/Script/GameManager.cs"
-"Assets/_game/Script/PlayerController.cs"
 -langversion:9.0
 
 /deterministic

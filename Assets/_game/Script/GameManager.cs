@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection.Emit;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class Gamemanager : MonoBehaviour
 {
     [SerializeField] GameObject[] brickList;
     [SerializeField] GameObject bridge;
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public Transform brickContainer;
     public Transform bridgeContainer;
 
-    public static GameManager instance;
+    public static Gamemanager instance;
     
     private void Start()
     {

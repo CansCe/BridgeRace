@@ -20,38 +20,42 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector3 newpos = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
         nexPosition = newpos;
+
         //rotate the player to the direction of moving
         if (newpos != Vector3.zero)
         {
             transform.rotation = Quaternion.LookRotation(newpos);
         }
     }
+
     //moving is in fixedupdate to get sync with the follwoing camera
     private void FixedUpdate()
     {
         //move player using rigidbody
         rb.MovePosition(rb.position + nexPosition * speed * Time.fixedDeltaTime);
     }
+
     //trigger event 
     private void OnTriggerEnter(Collider other)
     {
+        //if player hit the brick
         if(other.gameObject.tag == "Brick")
         {
             if (color == other.GetComponent<Brick>().color)
             {
                 Vector3 pos = new Vector3(backBrickContainer.transform.position.x, backBrickContainer.transform.position.y + (float)(1.25 * numberBrickCollected), backBrickContainer.transform.position.z);
                 numberBrickCollected += 1;
-                GameManager.instance.AddToList(other.gameObject.transform.position,other.GetComponent<Brick>().color);
+                Gamemanager.instance.AddToList(other.gameObject.transform.position,other.GetComponent<Brick>().color);
                 Destroy(other.gameObject);
                 Instantiate(brick,pos, transform.rotation, backBrickContainer.transform);
                 Debug.Log(numberBrickCollected);
             }
         }
+        //if player hit the bridge brick
         if (other.gameObject.CompareTag("BridgeBrick"))
         {
             if (numberBrickCollected > 0 )
@@ -79,6 +83,8 @@ public class PlayerController : MonoBehaviour
                 {
                     //undo the static 
                     rb.constraints = RigidbodyConstraints.None;
+                    //still freeze the rotation x y z
+                    rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
                 }
             }
         }
