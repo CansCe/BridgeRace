@@ -12,27 +12,20 @@ public class BridgeBrick : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter(Collider other)
+    
+    public void placed(int playerColor)
     {
-        if(other.gameObject.tag == "Player")
+        
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        if (playerColor != color)
         {
-            //active mesh renderer
-            gameObject.GetComponent<MeshRenderer>().enabled = true;
-            int playerColor= other.gameObject.GetComponent<PlayerController>().getOwnColor();
-            if(playerColor != color)
-            {
-                color = playerColor;
-                gameObject.GetComponent<MeshRenderer>().material = mats[color];
-            }
-            else
-            {
-                return;
-            }
+            color = playerColor;
+            gameObject.GetComponent<MeshRenderer>().material = mats[color];
+            canBePlace = !canBePlace;
         }
-    }
-
-    public void placed()
-    {
-        canBePlace = !canBePlace;
+        else
+        {
+            return;
+        }
     }
 }

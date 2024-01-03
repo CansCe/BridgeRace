@@ -123,3 +123,4 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 8d10ade778828b64c9f75022839304b4, type: 2}
   - {fileID: 2100000, guid: 74844cebcb50e614eb5d72db9b0e8fa6, type: 2}
   - {fileID: 2100000, guid: 5b8159e1c12f7964d80a547f061d6ece, type: 2}
+  canBePlace: 1

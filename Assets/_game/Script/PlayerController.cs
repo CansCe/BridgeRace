@@ -37,11 +37,6 @@ public class PlayerController : MonoBehaviour
         //move player using rigidbody
         rb.MovePosition(rb.position + nexPosition * speed * Time.fixedDeltaTime);
     }
-    //return the player's color
-    public int getOwnColor()
-    {
-        return color;
-    }
     //trigger event 
     private void OnTriggerEnter(Collider other)
     {
@@ -61,25 +56,29 @@ public class PlayerController : MonoBehaviour
         {
             if (numberBrickCollected > 0 )
             {
-                numberBrickCollected--;
-                Debug.Log("Remaining " + numberBrickCollected);
-                other.gameObject.GetComponent<BridgeBrick>().placed();
-                Destroy(backBrickContainer.transform.GetChild(numberBrickCollected).gameObject);
-            }
-            else if (numberBrickCollected == 0)
-            {
-                Debug.Log("1");
-                if (nexPosition.z >= 0)
+                if(other.gameObject.GetComponent<BridgeBrick>().canBePlace == false)
                 {
-                    Debug.Log("2");
-                    nexPosition.z = 0;
-                    nexPosition.y = 0;
-                    Debug.Log(nexPosition);
                     return;
                 }
                 else
                 {
-                    return;
+                    numberBrickCollected--;
+                    Debug.Log("Remaining " + numberBrickCollected);
+                    other.gameObject.GetComponent<BridgeBrick>().placed(color);
+                    Destroy(backBrickContainer.transform.GetChild(numberBrickCollected).gameObject);
+                }
+            }
+            else if (numberBrickCollected<=0)
+            {
+                if (nexPosition.z>0) 
+                {
+                    //make it static 
+                    rb.constraints = RigidbodyConstraints.FreezePositionZ;
+                }
+                else if (nexPosition.z < 0)
+                {
+                    //undo the static 
+                    rb.constraints = RigidbodyConstraints.None;
                 }
             }
         }
