@@ -8,40 +8,33 @@ public class Gamemanager : MonoBehaviour
     [SerializeField] GameObject[] brickList;
     [SerializeField] GameObject bridge;
     [SerializeField] Transform bridge1,bridge2,bridge3;
+    [SerializeField] Transform[] brickContainer = new Transform[3];
     
     Vector3 floor1_origin = new Vector3(3, 0, 5);
     Vector3 floor2_origin = new Vector3(3, 20, 87);
-    int red = 25;
-    int blue = 25;
-    int green = 25;
-    int yellow = 25;
-    private List<Vector3> takenBrickList = new List<Vector3>();
-
-    public Transform brickContainer;
-    public Transform bridgeContainer;
+    List<Vector3> takenBrickList = new List<Vector3>();
+    List<int> takenColor = new List<int>();
+    Transform bridgeContainer;
 
     public static Gamemanager instance;
     
     private void Start()
     {
         instance = this;
-        PlaceBrick(floor1_origin);
-        PlaceBrick(floor2_origin);
+        PlaceBrick(floor1_origin, brickContainer[0]);
+        PlaceBrick(floor2_origin, brickContainer[1]);
         SpawnBridge(bridge1.position);
         SpawnBridge(bridge2.position);
         SpawnBridge(bridge3.position);
     }
     private void Update()
     {
-        RespawnTakenBrick();
+        RespawnTakenBrick(brickContainer[2]);
     }
     //spawn the brick on the floor
-    private void PlaceBrick(Vector3 origin)
+    private void PlaceBrick(Vector3 origin,Transform Parent)
     {
         int countTheBrickNumber = 0;
-        //spawn brick per floor 
-        //4 bricks 25 each
-        brickContainer = new GameObject().transform;
         Vector3 newpos = origin;
         for (int i = 0; i < 10; i++)
         {
@@ -51,7 +44,7 @@ public class Gamemanager : MonoBehaviour
             {
                 int queque=GetColor(countTheBrickNumber);
                 newpos.x += (float)4.15;
-                Instantiate(brickList[queque],newpos, Quaternion.identity,brickContainer);
+                Instantiate(brickList[queque],newpos, Quaternion.identity,Parent);
                 countTheBrickNumber++;
             }
         }
@@ -107,33 +100,20 @@ public class Gamemanager : MonoBehaviour
     public void AddToList(Vector3 pos,int color)
     {
        takenBrickList.Add(pos);
-       switch (color)
-        {
-            case 0:
-                red++;
-                break;
-            case 1:
-                blue++;
-                break;
-            case 2:
-                green++;
-                break;
-            case 3:
-                yellow++;
-                break;
-        }
+       takenColor.Add(color);
     }
     //respawn the taken brick
-    void RespawnTakenBrick()
+    void RespawnTakenBrick(Transform Parent)
     {
         if(takenBrickList.Count > 5)
         {
             for(int i = 0; i < takenBrickList.Count; i++)
             {
-                int color = Random.Range(0,3);
-                Instantiate(brickList[color], takenBrickList[i], Quaternion.identity, brickContainer);
-                //remove the spawned brick from the list
+                int index = Random.Range(0,takenColor.Count);
+                int color = takenColor[index];
+                Instantiate(brickList[color], takenBrickList[i], Quaternion.identity, Parent);
                 takenBrickList.RemoveAt(i);
+                takenColor.RemoveAt(color);
             }
             return;
         }

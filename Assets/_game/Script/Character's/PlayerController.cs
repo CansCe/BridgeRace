@@ -36,16 +36,22 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         //move player using rigidbody
-        rb.MovePosition(rb.position + nexPosition * speed * Time.fixedDeltaTime);
+        rb.MovePosition(transform.position + nexPosition * speed * Time.deltaTime);
     }
 
     //trigger event 
     private void OnTriggerEnter(Collider other)
     {
-        //if player hit the brick
-        if(other.gameObject.tag == "Brick")
+        //if player hit the wall
+        if (other.gameObject.CompareTag("Wall"))
         {
-            if (color == other.GetComponent<Brick>().color)
+            //can't phase through wall
+            transform.position = transform.position - nexPosition * speed * Time.deltaTime;
+        }else 
+        //if player hit the brick
+        if (other.gameObject.tag == "Brick")
+        {
+            if (color == other.gameObject.GetComponent<Brick>().color)
             {
                 Vector3 pos = new Vector3(backBrickContainer.transform.position.x, backBrickContainer.transform.position.y + (float)(1.25 * numberBrickCollected), backBrickContainer.transform.position.z);
                 numberBrickCollected += 1;
@@ -54,13 +60,13 @@ public class PlayerController : MonoBehaviour
                 Instantiate(brick,pos, transform.rotation, backBrickContainer.transform);
                 Debug.Log(numberBrickCollected);
             }
-        }
-        //if player hit the bridge brick
+        }else 
         if (other.gameObject.CompareTag("BridgeBrick"))
         {
             if (numberBrickCollected > 0 )
             {
-                if(other.gameObject.GetComponent<BridgeBrick>().canBePlace == false)
+                if(other.gameObject.GetComponent<BridgeBrick>().canBePlace == false 
+                    && color == other.gameObject.GetComponent<BridgeBrick>().color)
                 {
                     return;
                 }
@@ -74,7 +80,11 @@ public class PlayerController : MonoBehaviour
             }
             else if (numberBrickCollected<=0)
             {
-                if (nexPosition.z>0) 
+                if(other.gameObject.GetComponent<BridgeBrick>().canBePlace == false)
+                {
+                    return;
+                }
+                else if (nexPosition.z>0) 
                 {
                     //make it static 
                     rb.constraints = RigidbodyConstraints.FreezePositionZ;
@@ -84,7 +94,7 @@ public class PlayerController : MonoBehaviour
                     //undo the static 
                     rb.constraints = RigidbodyConstraints.None;
                     //still freeze the rotation x y z
-                    rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+                    rb.constraints = RigidbodyConstraints.FreezeRotation;
                 }
             }
         }

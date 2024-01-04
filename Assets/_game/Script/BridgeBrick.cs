@@ -5,7 +5,7 @@ using UnityEngine;
 public class BridgeBrick : MonoBehaviour
 {
     [SerializeField] Material[] mats;
-    int color;
+    public int color;
     public bool canBePlace = true;
     
     public void placed(int playerColor)
