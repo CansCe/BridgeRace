@@ -29,7 +29,7 @@ public class Gamemanager : MonoBehaviour
     }
     private void Update()
     {
-        RespawnTakenBrick(brickContainer[2]);
+        RespawnTakenBrick();
     }
     //spawn the brick on the floor
     private void PlaceBrick(Vector3 origin,Transform Parent)
@@ -103,15 +103,23 @@ public class Gamemanager : MonoBehaviour
        takenColor.Add(color);
     }
     //respawn the taken brick
-    void RespawnTakenBrick(Transform Parent)
+    void RespawnTakenBrick()
     {
         if(takenBrickList.Count > 5)
         {
             for(int i = 0; i < takenBrickList.Count; i++)
             {
+                
                 int index = Random.Range(0,takenColor.Count);
                 int color = takenColor[index];
-                Instantiate(brickList[color], takenBrickList[i], Quaternion.identity, Parent);
+                if (takenBrickList[i].y < 5)
+                {
+                    Instantiate(brickList[color], takenBrickList[i], Quaternion.identity, brickContainer[0]);
+                }
+                else
+                {
+                    Instantiate(brickList[color], takenBrickList[i], Quaternion.identity, brickContainer[1]);
+                }
                 takenBrickList.RemoveAt(i);
                 takenColor.RemoveAt(color);
             }

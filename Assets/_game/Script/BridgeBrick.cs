@@ -5,7 +5,7 @@ using UnityEngine;
 public class BridgeBrick : MonoBehaviour
 {
     [SerializeField] Material[] mats;
-    public int color;
+    public int color = 5;
     public bool canBePlace = true;
     
     public void placed(int playerColor)
@@ -14,6 +14,10 @@ public class BridgeBrick : MonoBehaviour
         if (!gameObject.GetComponent<MeshRenderer>().enabled)
         {
             gameObject.GetComponent<MeshRenderer>().enabled = true;
+            Debug.Log("Repaint");
+            color = playerColor;
+            gameObject.GetComponent<MeshRenderer>().material = mats[color];
+            canBePlace = !canBePlace;
         }
         if (playerColor != color)
         {

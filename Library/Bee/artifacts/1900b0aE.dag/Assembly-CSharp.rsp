@@ -380,6 +380,7 @@
 "Assets/_game/Script/Character's/BotController.cs"
 "Assets/_game/Script/Character's/PlayerController.cs"
 "Assets/_game/Script/GameManager.cs"
+"Assets/_game/Script/StateMachine/Character's/iSate.cs"
 -langversion:9.0
 
 /deterministic

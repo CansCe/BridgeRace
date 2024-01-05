@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] FixedJoystick joystick;
     [SerializeField] GameObject backBrickContainer;
     [SerializeField] GameObject brick;
-    
+
     float speed = 15;
     int color = 1;
     int numberBrickCollected = 0;
@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
         {
             //can't phase through wall
             transform.position = transform.position - nexPosition * speed * Time.deltaTime;
+            rb.velocity = Vector3.zero;
         }else 
         //if player hit the brick
         if (other.gameObject.tag == "Brick")
@@ -61,6 +62,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(numberBrickCollected);
             }
         }else 
+        //if player hit the bridge brick
         if (other.gameObject.CompareTag("BridgeBrick"))
         {
             if (numberBrickCollected > 0 )
@@ -97,6 +99,10 @@ public class PlayerController : MonoBehaviour
                     rb.constraints = RigidbodyConstraints.FreezeRotation;
                 }
             }
+        }else
+        //if player hit the bot
+        if(other.gameObject.tag=="Bot"){
+            other.gameObject.GetComponent<BotController>().Hit();
         }
     }
 }
