@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Purchasing;
 
-public class BotController : MonoBehaviour
+public class BotController : Character
 {
     [SerializeField] GameObject backBrickContainer;
     [SerializeField] GameObject brick;
@@ -15,13 +15,12 @@ public class BotController : MonoBehaviour
     [SerializeField] Rigidbody rb;
 
     int numberBrickCollected = 0;
-    int color = 0;
+    public int color = 3;
     
     public int currentFloor =0;
 
     void Start()
     {
-
         StartCollectBrick();
     }
 

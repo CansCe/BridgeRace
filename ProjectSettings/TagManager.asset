@@ -12,6 +12,7 @@ TagManager:
   - Floor2
   - Floor3
   - Bot
+  - Bridge
   layers:
   - Default
   - TransparentFX

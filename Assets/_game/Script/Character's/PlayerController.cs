@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditorInternal;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Character
 {
     [SerializeField] Rigidbody rb;
     [SerializeField] FixedJoystick joystick;
@@ -24,18 +24,25 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 newpos = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
         nexPosition = newpos;
-
-        //rotate the player to the direction of moving
         if (newpos != Vector3.zero)
         {
             transform.rotation = Quaternion.LookRotation(newpos);
         }
     }
 
-    //moving is in fixedupdate to get sync with the follwoing camera
     private void FixedUpdate()
     {
-        //move player using rigidbody
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 100))
+        {
+            if (hit.collider.gameObject.CompareTag("Bridge"))
+            {
+                if (nexPosition.z < 0)
+                {
+                    nexPosition.y -=1.25f;
+                }
+            }
+        }
         rb.MovePosition(transform.position + nexPosition * speed * Time.deltaTime);
     }
 
@@ -47,8 +54,7 @@ public class PlayerController : MonoBehaviour
         {
             //can't phase through wall
             transform.position = transform.position - nexPosition * speed * Time.deltaTime;
-            rb.velocity = Vector3.zero;
-        }else 
+        }
         //if player hit the brick
         if (other.gameObject.tag == "Brick")
         {
@@ -61,7 +67,7 @@ public class PlayerController : MonoBehaviour
                 Instantiate(brick,pos, transform.rotation, backBrickContainer.transform);
                 Debug.Log(numberBrickCollected);
             }
-        }else 
+        }
         //if player hit the bridge brick
         if (other.gameObject.CompareTag("BridgeBrick"))
         {
@@ -74,6 +80,8 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
+                    //make the player go up a bit higher
+                    transform.position = transform.position + new Vector3(0, 0.25f, 0);
                     numberBrickCollected--;
                     Debug.Log("Remaining " + numberBrickCollected);
                     other.gameObject.GetComponent<BridgeBrick>().placed(color);
@@ -88,18 +96,15 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (nexPosition.z>0) 
                 {
-                    //make it static 
                     rb.constraints = RigidbodyConstraints.FreezePositionZ;
                 }
                 else if (nexPosition.z < 0)
                 {
-                    //undo the static 
                     rb.constraints = RigidbodyConstraints.None;
-                    //still freeze the rotation x y z
                     rb.constraints = RigidbodyConstraints.FreezeRotation;
                 }
             }
-        }else
+        }
         //if player hit the bot
         if(other.gameObject.tag=="Bot"){
             other.gameObject.GetComponent<BotController>().Hit();

@@ -14,23 +14,18 @@ public class BridgeBrick : MonoBehaviour
         if (!gameObject.GetComponent<MeshRenderer>().enabled)
         {
             gameObject.GetComponent<MeshRenderer>().enabled = true;
-            Debug.Log("Repaint");
             color = playerColor;
             gameObject.GetComponent<MeshRenderer>().material = mats[color];
             canBePlace = !canBePlace;
         }
         if (playerColor != color)
         {
+            if (canBePlace == true)
+            {
+                canBePlace = !canBePlace;
+            }
             color = playerColor;
             gameObject.GetComponent<MeshRenderer>().material = mats[color];
-            canBePlace = !canBePlace;
-        }
-        else if (canBePlace == true && color != playerColor)
-        {
-            Debug.Log("Repaint");
-            color = playerColor;
-            gameObject.GetComponent<MeshRenderer>().material = mats[color];
-            canBePlace = !canBePlace;
         }
         else
         {

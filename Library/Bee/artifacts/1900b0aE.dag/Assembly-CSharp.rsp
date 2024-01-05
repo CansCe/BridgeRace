@@ -379,8 +379,11 @@
 "Assets/_game/Script/CameraScipt.cs"
 "Assets/_game/Script/Character's/BotController.cs"
 "Assets/_game/Script/Character's/PlayerController.cs"
+"Assets/_game/Script/Character.cs"
 "Assets/_game/Script/GameManager.cs"
+"Assets/_game/Script/StateMachine/Character's/IdleState.cs"
 "Assets/_game/Script/StateMachine/Character's/iSate.cs"
+"Assets/_game/Script/StateMachine/Character's/RunningState.cs"
 -langversion:9.0
 
 /deterministic
