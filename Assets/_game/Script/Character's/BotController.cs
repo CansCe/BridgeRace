@@ -10,14 +10,14 @@ public class BotController : Character
     [SerializeField] GameObject backBrickContainer;
     [SerializeField] GameObject brick;
     [SerializeField] Transform destination;
-    [SerializeField] Transform[] BrickContainer;
+    public Transform[] BrickContainer = new Transform[2];
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Rigidbody rb;
 
     int numberBrickCollected = 0;
     public int color = 3;
-    
-    public int currentFloor =0;
+
+    public int currentFloor = 0;
 
     void Start()
     {
@@ -35,7 +35,7 @@ public class BotController : Character
             {
                 currentFloor = 0;
             }
-            else if(hit.collider.gameObject.CompareTag("Floor2"))
+            else if (hit.collider.gameObject.CompareTag("Floor2"))
             {
                 currentFloor = 1;
             }
@@ -56,7 +56,7 @@ public class BotController : Character
                 Destroy(other.gameObject);
                 Instantiate(brick, pos, transform.rotation, backBrickContainer.transform);
                 Debug.Log(numberBrickCollected);
-                if(numberBrickCollected <= 10)
+                if (numberBrickCollected <= 10)
                 {
                     StartCollectBrick();
                 }
@@ -65,7 +65,8 @@ public class BotController : Character
                     agent.destination = destination.position;
                 }
             }
-        }else
+        }
+        else
         //if player hit the bridge brick
         if (other.CompareTag("BridgeBrick"))
         {
@@ -88,7 +89,7 @@ public class BotController : Character
             {
                 if (color == other.gameObject.GetComponent<BridgeBrick>().color)
                     return;
-                if(other.gameObject.GetComponent<BridgeBrick>().canBePlace)
+                if (other.gameObject.GetComponent<BridgeBrick>().canBePlace)
                 {
                     agent.velocity = Vector3.zero;
                     Stop();
@@ -112,7 +113,7 @@ public class BotController : Character
         Transform tMin = null;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = transform.position;
-        for (int i=0; i< Container.childCount; i++)
+        for (int i = 0; i < Container.childCount; i++)
         {
             Transform t = Container.GetChild(i);
             float dist = Vector3.Distance(t.position, currentPos);

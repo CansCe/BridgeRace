@@ -8,7 +8,7 @@ public class Gamemanager : MonoBehaviour
     [SerializeField] GameObject[] brickList;
     [SerializeField] GameObject bridge;
     [SerializeField] Transform bridge1,bridge2,bridge3;
-    [SerializeField] Transform[] brickContainer = new Transform[3];
+    public Transform[] brickContainer = new Transform[2];
     
     Vector3 floor1_origin = new Vector3(3, 0, 5);
     Vector3 floor2_origin = new Vector3(3, 20, 87);
@@ -19,6 +19,10 @@ public class Gamemanager : MonoBehaviour
     public static Gamemanager instance;
     
     private void Start()
+    {
+       
+    }
+    private void Awake()
     {
         instance = this;
         PlaceBrick(floor1_origin, brickContainer[0]);
@@ -35,7 +39,7 @@ public class Gamemanager : MonoBehaviour
     private void PlaceBrick(Vector3 origin,Transform Parent)
     {
         int countTheBrickNumber = 0;
-        Vector3 newpos = origin;
+        Vector3 newpos;
         for (int i = 0; i < 10; i++)
         {
             newpos = origin;
