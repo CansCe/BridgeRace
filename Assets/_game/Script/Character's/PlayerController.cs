@@ -94,15 +94,23 @@ public class PlayerController : Character
                 {
                     return;
                 }
-                else if (nexPosition.z>0) 
+                else if(color != other.gameObject.GetComponent<BridgeBrick>().color)
                 {
-                    rb.constraints = RigidbodyConstraints.FreezePositionZ;
+                    if (nexPosition.z > 0)
+                    {
+                        rb.constraints = RigidbodyConstraints.FreezePositionZ;
+                    }
+                    else if (nexPosition.z < 0)
+                    {
+                        rb.constraints = RigidbodyConstraints.None;
+                        rb.constraints = RigidbodyConstraints.FreezeRotation;
+                    }
                 }
-                else if (nexPosition.z < 0)
+                else
                 {
-                    rb.constraints = RigidbodyConstraints.None;
-                    rb.constraints = RigidbodyConstraints.FreezeRotation;
+                    return;
                 }
+                
             }
         }
         //if player hit the bot

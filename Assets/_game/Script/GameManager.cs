@@ -84,7 +84,6 @@ public class Gamemanager : MonoBehaviour
         }
         return shuffledBricks[count];
     }
-
     //Spawn the brick of the bridge
     private void SpawnBridge(Vector3 pos)
     {

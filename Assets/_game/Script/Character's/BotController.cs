@@ -86,11 +86,12 @@ public class BotController : Character
             }
             else if (numberBrickCollected <= 0)
             {
+                if (color == other.gameObject.GetComponent<BridgeBrick>().color)
+                    return;
                 if(other.gameObject.GetComponent<BridgeBrick>().canBePlace)
                 {
-                    Debug.Log("STOP");
-                    Stop();
                     agent.velocity = Vector3.zero;
+                    Stop();
                 }
                 StartCollectBrick();
             }
@@ -130,22 +131,16 @@ public class BotController : Character
     void Stop()
     {
         agent.isStopped = true;
-        //decrease the velocity of the agent
-        //minus half of the velocity of the agent
         agent.velocity = agent.velocity - agent.velocity / (float)(1.5);
         agent.isStopped = false;
     }
-    //call if player hit the bot
     public void Hit()
     {
-        //loose all brick collected
         numberBrickCollected = 0;
-        //loose all brick in the back
         for (int i = 0; i < backBrickContainer.transform.childCount; i++)
         {
             Destroy(backBrickContainer.transform.GetChild(i).gameObject);
         }
-        //unfreeze all rotation and then fall down
         rb.constraints = RigidbodyConstraints.None;
     }
 }
