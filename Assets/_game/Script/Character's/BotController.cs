@@ -143,5 +143,6 @@ public class BotController : Character
             Destroy(backBrickContainer.transform.GetChild(i).gameObject);
         }
         rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
 }

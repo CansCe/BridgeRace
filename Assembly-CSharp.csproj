@@ -61,7 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FixedJoystick.cs" />
-    <Compile Include="Assets\_game\Script\StateMachine\Character&apos;s\iSate.cs" />
+    <Compile Include="Assets\_game\StateMachine\Character&apos;s\RunningState.cs" />
+    <Compile Include="Assets\_game\StateMachine\Character&apos;s\IdleState.cs" />
     <Compile Include="Assets\_game\Script\BridgeBrick.cs" />
     <Compile Include="Assets\_game\Script\CameraScipt.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
@@ -69,14 +70,13 @@
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\DynamicJoystick.cs" />
     <Compile Include="Assets\_game\Script\Character.cs" />
     <Compile Include="Assets\_game\Script\Character&apos;s\PlayerController.cs" />
-    <Compile Include="Assets\_game\Script\StateMachine\Character&apos;s\IdleState.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Base\Joystick.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
     <Compile Include="Assets\_game\Script\Brick.cs" />
-    <Compile Include="Assets\_game\Script\StateMachine\Character&apos;s\RunningState.cs" />
     <Compile Include="Assets\_game\Script\Character&apos;s\BotController.cs" />
     <Compile Include="Assets\_game\Script\GameManager.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickPlayerExample.cs" />
+    <Compile Include="Assets\_game\StateMachine\Character&apos;s\ISate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
