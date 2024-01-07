@@ -1,22 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    iSate currentState;
 
-    void Start()
+    public Animator anim;
+    private string currentAnim;
+    public void ChangeAnim(string animName)
     {
-        currentState = new IdleState();
-    }
-
-    // Update is called once per frame
-    void ChangeState(iSate newState)
-    {
-       if(currentState != newState)
-       {
-            currentState = newState;
-       }
+        if(currentAnim != animName)
+        {
+            if (currentAnim != null)
+                anim.ResetTrigger(currentAnim);
+            currentAnim = animName;
+            anim.SetTrigger(currentAnim);
+        }
     }
 }

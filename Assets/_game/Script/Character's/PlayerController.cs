@@ -9,6 +9,8 @@ public class PlayerController : Character
     [SerializeField] FixedJoystick joystick;
     [SerializeField] GameObject backBrickContainer;
     [SerializeField] GameObject brick;
+    [SerializeField] Transform finishLine;
+    
 
     float speed = 15;
     int color = 1;
@@ -26,8 +28,14 @@ public class PlayerController : Character
         nexPosition = newpos;
         if (newpos != Vector3.zero)
         {
+            ChangeAnim("run");
             transform.rotation = Quaternion.LookRotation(newpos);
         }
+        else
+        {
+            ChangeAnim("idle");
+        }
+
     }
 
     private void FixedUpdate()
@@ -65,7 +73,6 @@ public class PlayerController : Character
                 Gamemanager.instance.AddToList(other.gameObject.transform.position,other.GetComponent<Brick>().color);
                 Destroy(other.gameObject);
                 Instantiate(brick,pos, transform.rotation, backBrickContainer.transform);
-                Debug.Log(numberBrickCollected);
             }
         }
         //if player hit the bridge brick
@@ -83,7 +90,6 @@ public class PlayerController : Character
                     //make the player go up a bit higher
                     transform.position = transform.position + new Vector3(0, 0.25f, 0);
                     numberBrickCollected--;
-                    Debug.Log("Remaining " + numberBrickCollected);
                     other.gameObject.GetComponent<BridgeBrick>().placed(color);
                     Destroy(backBrickContainer.transform.GetChild(numberBrickCollected).gameObject);
                 }
@@ -112,6 +118,14 @@ public class PlayerController : Character
                 }
                 
             }
+        }else
+        if (other.gameObject.tag == "finish")
+        {
+            //player can not move via joystick
+            joystick.gameObject.SetActive(false);
+            //move player toward the finish line
+            transform.position = Vector3.MoveTowards(transform.position, finishLine.position, 10 * Time.deltaTime);
+            ChangeAnim("victory");
         }
         //if player hit the bot
         if(other.gameObject.tag=="Bot"){

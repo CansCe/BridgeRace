@@ -10,24 +10,34 @@ public class BotController : Character
     [SerializeField] GameObject backBrickContainer;
     [SerializeField] GameObject brick;
     [SerializeField] Transform destination;
-    public Transform[] BrickContainer = new Transform[2];
+    [SerializeField] Transform finishLine;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Rigidbody rb;
+    
 
     int numberBrickCollected = 0;
-    public int color = 3;
-
+    int targetNumBrick;
+    public int color;
+    public Transform[] BrickContainer = new Transform[2];
     public int currentFloor = 0;
+
 
     void Start()
     {
+        targetNumBrick = Random.Range(10, 20);
         StartCollectBrick();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //shoot a raycast to check what floor is the bot standing on
+        if (agent.velocity != Vector3.zero)
+        {
+            ChangeAnim("run");
+        }
+        else
+        {
+            ChangeAnim("idle");
+        }
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 100))
         {
@@ -55,13 +65,13 @@ public class BotController : Character
                 other.transform.SetParent(null);
                 Destroy(other.gameObject);
                 Instantiate(brick, pos, transform.rotation, backBrickContainer.transform);
-                Debug.Log(numberBrickCollected);
-                if (numberBrickCollected <= 10)
+                if (numberBrickCollected <= targetNumBrick)
                 {
                     StartCollectBrick();
                 }
                 else
                 {
+                    targetNumBrick = Random.Range(10, 20);
                     agent.destination = destination.position;
                 }
             }
@@ -80,7 +90,6 @@ public class BotController : Character
                 else
                 {
                     numberBrickCollected--;
-                    Debug.Log("Remaining " + numberBrickCollected + color);
                     other.gameObject.GetComponent<BridgeBrick>().placed(color);
                     Destroy(backBrickContainer.transform.GetChild(numberBrickCollected).gameObject);
                 }
@@ -96,6 +105,13 @@ public class BotController : Character
                 }
                 StartCollectBrick();
             }
+        }else 
+        if (other.gameObject.CompareTag("Finish"))
+        {
+            Stop();
+            Debug.Log("reach the destination");
+            agent.SetDestination(finishLine.position);
+            ChangeAnim("victory");
         }
     }
     //wait till the bot reach the destination
@@ -132,6 +148,7 @@ public class BotController : Character
     void Stop()
     {
         agent.isStopped = true;
+        agent.ResetPath();
         agent.velocity = agent.velocity - agent.velocity / (float)(1.5);
         agent.isStopped = false;
     }

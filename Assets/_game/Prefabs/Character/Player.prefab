@@ -83,7 +83,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8538631871146883458}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 38.99, y: 1.5, z: 1.15}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
@@ -204,10 +204,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f26bd6c3c0060574088878e7ce04264b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 4750512765095842059}
   rb: {fileID: 2946277867874067506}
   joystick: {fileID: 0}
   backBrickContainer: {fileID: 6673516442784928971}
   brick: {fileID: 8357769269727424248, guid: 600746b18c831bf428b4a76718311d74, type: 3}
+  finishLine: {fileID: 0}
 --- !u!95 &4750512765095842059
 Animator:
   serializedVersion: 5

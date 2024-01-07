@@ -108,7 +108,7 @@ public class Gamemanager : MonoBehaviour
     //respawn the taken brick
     void RespawnTakenBrick()
     {
-        if(takenBrickList.Count > 5)
+        if(takenBrickList.Count > 10)
         {
             for(int i = 0; i < takenBrickList.Count; i++)
             {
