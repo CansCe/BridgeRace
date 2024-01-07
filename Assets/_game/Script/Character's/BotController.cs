@@ -61,7 +61,7 @@ public class BotController : Character
                 Stop();
                 Vector3 pos = new Vector3(backBrickContainer.transform.position.x, backBrickContainer.transform.position.y + (float)(1.25 * numberBrickCollected), backBrickContainer.transform.position.z);
                 numberBrickCollected += 1;
-                Gamemanager.instance.AddToList(other.gameObject.transform.position, other.GetComponent<Brick>().color);
+                LevelManager.instance.AddToList(other.gameObject.transform.position, other.GetComponent<Brick>().color);
                 other.transform.SetParent(null);
                 Destroy(other.gameObject);
                 Instantiate(brick, pos, transform.rotation, backBrickContainer.transform);

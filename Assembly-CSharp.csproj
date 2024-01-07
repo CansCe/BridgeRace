@@ -63,14 +63,15 @@
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FixedJoystick.cs" />
     <Compile Include="Assets\_game\StateMachine\Character&apos;s\RunningState.cs" />
     <Compile Include="Assets\_game\StateMachine\Character&apos;s\IdleState.cs" />
+    <Compile Include="Assets\_game\Script\Character&apos;s\Character.cs" />
     <Compile Include="Assets\_game\Script\BridgeBrick.cs" />
     <Compile Include="Assets\_game\Script\CameraScipt.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\DynamicJoystick.cs" />
-    <Compile Include="Assets\_game\Script\Character.cs" />
     <Compile Include="Assets\_game\Script\Character&apos;s\PlayerController.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Base\Joystick.cs" />
+    <Compile Include="Assets\_game\Script\LevelManager.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
     <Compile Include="Assets\_game\Script\Brick.cs" />
     <Compile Include="Assets\_game\Script\Character&apos;s\BotController.cs" />
@@ -413,6 +414,18 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>Library\PackageCache\com.unity.analytics@3.8.1\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.Types">
+      <HintPath>F:\UnityHub\Resources\2022.3.13f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.Gradle">
+      <HintPath>F:\UnityHub\Resources\2022.3.13f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.GradleProject">
+      <HintPath>F:\UnityHub\Resources\2022.3.13f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.GradleProject.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">

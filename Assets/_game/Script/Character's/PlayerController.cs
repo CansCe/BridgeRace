@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class PlayerController : Character
@@ -10,7 +9,6 @@ public class PlayerController : Character
     [SerializeField] GameObject backBrickContainer;
     [SerializeField] GameObject brick;
     [SerializeField] Transform finishLine;
-    
 
     float speed = 15;
     int color = 1;
@@ -70,7 +68,7 @@ public class PlayerController : Character
             {
                 Vector3 pos = new Vector3(backBrickContainer.transform.position.x, backBrickContainer.transform.position.y + (float)(1.25 * numberBrickCollected), backBrickContainer.transform.position.z);
                 numberBrickCollected += 1;
-                Gamemanager.instance.AddToList(other.gameObject.transform.position,other.GetComponent<Brick>().color);
+                LevelManager.instance.AddToList(other.gameObject.transform.position,other.GetComponent<Brick>().color);
                 Destroy(other.gameObject);
                 Instantiate(brick,pos, transform.rotation, backBrickContainer.transform);
             }
@@ -80,56 +78,55 @@ public class PlayerController : Character
         {
             if (numberBrickCollected > 0 )
             {
-                if(other.gameObject.GetComponent<BridgeBrick>().canBePlace == false 
-                    && color == other.gameObject.GetComponent<BridgeBrick>().color)
+                if(other.gameObject.GetComponent<BridgeBrick>().canBePlace == true || other.gameObject.GetComponent<BridgeBrick>().color != color)
                 {
-                    return;
-                }
-                else
-                {
-                    //make the player go up a bit higher
-                    transform.position = transform.position + new Vector3(0, 0.25f, 0);
-                    numberBrickCollected--;
-                    other.gameObject.GetComponent<BridgeBrick>().placed(color);
-                    Destroy(backBrickContainer.transform.GetChild(numberBrickCollected).gameObject);
+                    PlaceBrickOnTheBridge();
+                    other.GetComponent<BridgeBrick>().placed(color);
                 }
             }
             else if (numberBrickCollected<=0)
             {
                 if(other.gameObject.GetComponent<BridgeBrick>().canBePlace == false)
                 {
-                    return;
-                }
-                else if(color != other.gameObject.GetComponent<BridgeBrick>().color)
-                {
-                    if (nexPosition.z > 0)
+                    if(other.gameObject.GetComponent<BridgeBrick>().color != color)
                     {
-                        rb.constraints = RigidbodyConstraints.FreezePositionZ;
-                    }
-                    else if (nexPosition.z < 0)
-                    {
-                        rb.constraints = RigidbodyConstraints.None;
-                        rb.constraints = RigidbodyConstraints.FreezeRotation;
+                        ConstrainPlayer();
                     }
                 }
                 else
                 {
-                    return;
+                    ConstrainPlayer();
                 }
-                
             }
         }else
         if (other.gameObject.tag == "finish")
         {
-            //player can not move via joystick
-            joystick.gameObject.SetActive(false);
-            //move player toward the finish line
+            Debug.Log("Reach Destination");
             transform.position = Vector3.MoveTowards(transform.position, finishLine.position, 10 * Time.deltaTime);
             ChangeAnim("victory");
         }
         //if player hit the bot
         if(other.gameObject.tag=="Bot"){
             other.gameObject.GetComponent<BotController>().Hit();
+        }
+    }
+
+    void PlaceBrickOnTheBridge()
+    {
+        transform.position = transform.position + new Vector3(0, 0.25f, 0);
+        numberBrickCollected--;
+        Destroy(backBrickContainer.transform.GetChild(numberBrickCollected).gameObject);
+    }
+    void ConstrainPlayer()
+    {
+        if (nexPosition.z > 0)
+        {
+            rb.constraints = RigidbodyConstraints.FreezePositionZ;
+        }
+        else if (nexPosition.z < 0)
+        {
+            rb.constraints = RigidbodyConstraints.None;
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
     }
 }
