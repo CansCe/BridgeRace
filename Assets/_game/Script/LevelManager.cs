@@ -5,14 +5,13 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] brickList;
+    [SerializeField] GameObject brick;
     [SerializeField] GameObject bridge;
-    [SerializeField] Transform bridge1,bridge2,bridge3;
-    public Transform[] brickContainer = new Transform[2];
-    
-    Vector3 floor1_origin = new Vector3(3, 0, 5);
-    Vector3 floor2_origin = new Vector3(3, 20, 87);
-    List<Vector3> takenBrickList = new List<Vector3>();
+    [SerializeField] Transform[] bridges;
+    [SerializeField] Transform[] brickContainer ;
+    [SerializeField] Transform[] Origins;
+    int takenBrickFloor1 = 0; 
+    int takenBrickFloor2 = 0; 
     List<int> takenColor = new List<int>();
     Transform bridgeContainer;
 
@@ -20,16 +19,15 @@ public class LevelManager : MonoBehaviour
     
     private void Start()
     {
-       
-    }
-    private void Awake()
-    {
         instance = this;
-        PlaceBrick(floor1_origin, brickContainer[0]);
-        PlaceBrick(floor2_origin, brickContainer[1]);
-        SpawnBridge(bridge1.position);
-        SpawnBridge(bridge2.position);
-        SpawnBridge(bridge3.position);
+        for(int i=0; i<Origins.Length; i++)
+        {
+            PlaceBrick(Origins[i].position, brickContainer[i]);
+        }
+        for(int i=0; i<bridges.Length; i++)
+        {
+            SpawnBridge(bridges[i].position);
+        }
     }
     private void Update()
     {
@@ -48,12 +46,16 @@ public class LevelManager : MonoBehaviour
             {
                 int queque=GetColor(countTheBrickNumber);
                 newpos.x += (float)4.15;
-                Instantiate(brickList[queque],newpos, Quaternion.identity,Parent);
+                GameObject clone = Instantiate(brick,newpos, Quaternion.identity,Parent);
+                clone.GetComponent<Brick>().SetColor(queque);
                 countTheBrickNumber++;
+                if(origin.y <15)
+                    Floor1BrickPool.instance.AddToThePool(clone);
+                else
+                    Floor2BrickPool.instance.AddToThePool(clone);
             }
         }
     }
-    //get the color of the brick | red = 0 | blue = 1 | green = 2 | yellow = 3
     private int GetColor(int count)
     {
         int[] remainingBricks = new int[4] { 25, 25, 25, 25 };
@@ -100,32 +102,41 @@ public class LevelManager : MonoBehaviour
         }
     }
     //add the taken brick position to the list and count the color
-    public void AddToList(Vector3 pos,int color)
+    public void AddToList(int color,int floor)
     {
-       takenBrickList.Add(pos);
-       takenColor.Add(color);
+        takenColor.Add(color);
+        switch (floor)
+        {
+            case 0:
+                takenBrickFloor1++;
+                break;
+            case 1:
+                takenBrickFloor2++;
+                break;
+        }
     }
     //respawn the taken brick
     void RespawnTakenBrick()
     {
-        if(takenBrickList.Count > 10)
+        if(takenBrickFloor1 >= 15)
         {
-            for(int i = 0; i < takenBrickList.Count; i++)
-            {
-                int index = Random.Range(0, takenColor.Count-1);
-                int color = takenColor[index];
-                if (takenBrickList[i].y < 5)
-                {
-                    Instantiate(brickList[color], takenBrickList[i], Quaternion.identity, brickContainer[0]);
-                }
-                else
-                {
-                    Instantiate(brickList[color], takenBrickList[i], Quaternion.identity, brickContainer[1]);
-                }
-                takenBrickList.RemoveAt(i);
-                takenColor.RemoveAt(index);
-            }
-            return;
+            int rand = Random.Range(0, takenColor.Count);
+            int color = takenColor[rand];            
+            GameObject Clone = Floor1BrickPool.instance.GetPooledBrick();
+            Clone.SetActive(true);
+            Clone.GetComponent<Brick>().SetColor(color);
+            takenColor.RemoveAt(rand);
+            takenBrickFloor1--;
+        }
+        if (takenBrickFloor2 >= 15)
+        {
+            int rand = Random.Range(0, takenColor.Count);
+            int color = takenColor[rand];
+            GameObject Clone = Floor2BrickPool.instance.GetPooledBrick();
+            Clone.SetActive(true);
+            Clone.GetComponent<Brick>().SetColor(color);
+            takenColor.RemoveAt(rand);
+            takenBrickFloor2--;
         }
     }
 }

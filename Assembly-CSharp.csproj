@@ -61,21 +61,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FixedJoystick.cs" />
+    <Compile Include="Assets\_game\StateMachine\Character&apos;s\StateManager.cs" />
     <Compile Include="Assets\_game\Script\Character&apos;s\Character.cs" />
+    <Compile Include="Assets\_Pool\Pool\ParticlePool.cs" />
     <Compile Include="Assets\_game\StateMachine\Character&apos;s\StartState.cs" />
     <Compile Include="Assets\_game\Script\BridgeBrick.cs" />
     <Compile Include="Assets\_game\Script\CameraScipt.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
+    <Compile Include="Assets\_game\Script\GUI\PauseButton.cs" />
+    <Compile Include="Assets\_Pool\Pool\PoolControler.cs" />
     <Compile Include="Assets\_game\StateMachine\Character&apos;s\PauseState.cs" />
+    <Compile Include="Assets\_Pool\Pool\SimplePool.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\DynamicJoystick.cs" />
     <Compile Include="Assets\_game\Script\GUI\PlayButton.cs" />
     <Compile Include="Assets\_game\StateMachine\Character&apos;s\IState.cs" />
     <Compile Include="Assets\_game\Script\Character&apos;s\PlayerController.cs" />
+    <Compile Include="Assets\_game\Script\BackBrick.cs" />
+    <Compile Include="Assets\_Pool\Bullet.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Base\Joystick.cs" />
     <Compile Include="Assets\_game\Script\LevelManager.cs" />
+    <Compile Include="Assets\_game\Script\Floor1BrickPool.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
+    <Compile Include="Assets\_Pool\Pool\GameUnit.cs" />
+    <Compile Include="Assets\_game\Script\Floor2BrickPool1.cs" />
+    <Compile Include="Assets\_Pool\Guner.cs" />
     <Compile Include="Assets\_game\Script\Brick.cs" />
+    <Compile Include="Assets\_Pool\Pool\MiniPool.cs" />
     <Compile Include="Assets\_game\Script\Character&apos;s\BotController.cs" />
     <Compile Include="Assets\_game\Script\GameManager.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickPlayerExample.cs" />
@@ -97,6 +109,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\_Pool\ReadMe.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />

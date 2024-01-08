@@ -22,10 +22,17 @@ public class BotController : Character
     public int currentFloor = 0;
 
 
+
+    protected override void OnDestroy()
+    {
+        StateManager.instance.OnGameStateChanged -= OnGameStateChanged;
+    }
     void Start()
     {
         targetNumBrick = Random.Range(10, 20);
         StartCollectBrick();
+        StateManager.instance.OnGameStateChanged += OnGameStateChanged;
+
     }
 
     void Update()
@@ -49,6 +56,14 @@ public class BotController : Character
             {
                 currentFloor = 1;
             }
+            else if (hit.collider.gameObject.CompareTag("Floor2a"))
+            {
+                currentFloor = 1;
+            }
+            else if (hit.collider.gameObject.CompareTag("Floor2b"))
+            {
+                currentFloor = 2;
+            }
         }
     }
 
@@ -61,9 +76,8 @@ public class BotController : Character
                 Stop();
                 Vector3 pos = new Vector3(backBrickContainer.transform.position.x, backBrickContainer.transform.position.y + (float)(1.25 * numberBrickCollected), backBrickContainer.transform.position.z);
                 numberBrickCollected += 1;
-                LevelManager.instance.AddToList(other.gameObject.transform.position, other.GetComponent<Brick>().color);
-                other.transform.SetParent(null);
-                Destroy(other.gameObject);
+                LevelManager.instance.AddToList(color, currentFloor);
+                other.gameObject.SetActive(false);
                 Instantiate(brick, pos, transform.rotation, backBrickContainer.transform);
                 if (numberBrickCollected <= targetNumBrick)
                 {
@@ -132,12 +146,17 @@ public class BotController : Character
         for (int i = 0; i < Container.childCount; i++)
         {
             Transform t = Container.GetChild(i);
+            if (t.gameObject.activeInHierarchy == false)
+            {
+                continue;
+            }
             float dist = Vector3.Distance(t.position, currentPos);
             if (dist < minDist)
             {
                 //if the child has the same color
-                if (t.GetComponent<Brick>().color == color)
+                if (t.GetComponent<Brick>().color == color )
                 {
+
                     tMin = t;
                     minDist = dist;
                 }
@@ -161,5 +180,11 @@ public class BotController : Character
         }
         rb.constraints = RigidbodyConstraints.None;
         rb.constraints = RigidbodyConstraints.FreezeRotation;
+    }
+
+    protected override void OnGameStateChanged(IState newGameState)
+    {
+        Debug.Log("Player unable");
+        enabled = newGameState == IState.Start;
     }
 }

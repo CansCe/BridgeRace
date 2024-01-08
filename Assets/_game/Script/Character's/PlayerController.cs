@@ -15,7 +15,7 @@ public class PlayerController : Character
     int color = 1;
     int numberBrickCollected = 0;
     Vector3 nexPosition;
-
+    int currentFloor;
     void Start()
     {
         
@@ -34,7 +34,26 @@ public class PlayerController : Character
         {
             ChangeAnim("idle");
         }
-
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 100))
+        {
+            if (hit.collider.gameObject.CompareTag("Floor1"))
+            {
+                currentFloor = 0;
+            }
+            else if (hit.collider.gameObject.CompareTag("Floor2"))
+            {
+                currentFloor = 1;
+            }
+            else if (hit.collider.gameObject.CompareTag("Floor2a"))
+            {
+                currentFloor = 1;
+            }
+            else if (hit.collider.gameObject.CompareTag("Floor2b"))
+            {
+                currentFloor = 2;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -69,8 +88,8 @@ public class PlayerController : Character
             {
                 Vector3 pos = new Vector3(backBrickContainer.transform.position.x, backBrickContainer.transform.position.y + (float)(1.25 * numberBrickCollected), backBrickContainer.transform.position.z);
                 numberBrickCollected += 1;
-                LevelManager.instance.AddToList(other.gameObject.transform.position,other.GetComponent<Brick>().color);
-                Destroy(other.gameObject);
+                other.gameObject.SetActive(false);
+                LevelManager.instance.AddToList(color,currentFloor);
                 Instantiate(brick,pos, transform.rotation, backBrickContainer.transform);
             }
         }

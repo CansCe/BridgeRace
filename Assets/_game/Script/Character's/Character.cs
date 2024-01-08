@@ -5,6 +5,18 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    protected Character _instance;
+
+    private void Awake()
+    {
+        _instance = GetComponent<Character>();
+        StateManager.instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    protected virtual void OnDestroy()
+    {
+        StateManager.instance.OnGameStateChanged -= OnGameStateChanged;
+    }
 
     public Animator anim;
     private string currentAnim;
@@ -17,5 +29,11 @@ public class Character : MonoBehaviour
             currentAnim = animName;
             anim.SetTrigger(currentAnim);
         }
+    }
+
+    protected virtual void OnGameStateChanged(IState newGameState)
+    {
+        Debug.Log("Player unable");
+        enabled = newGameState == IState.Start;
     }
 }

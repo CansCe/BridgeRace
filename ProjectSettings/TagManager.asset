@@ -9,10 +9,10 @@ TagManager:
   - BridgeBrick
   - Wall
   - Floor1
-  - Floor2
-  - Floor3
   - Bot
   - Bridge
+  - Floor2a
+  - Floor2b
   layers:
   - Default
   - TransparentFX
