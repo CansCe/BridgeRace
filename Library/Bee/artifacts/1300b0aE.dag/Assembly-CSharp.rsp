@@ -328,6 +328,8 @@
 -r:"F:/UnityHub/Resources/2022.3.13f1/Editor/Data/PlaybackEngines/AndroidPlayer/Unity.Android.Gradle.dll"
 -r:"F:/UnityHub/Resources/2022.3.13f1/Editor/Data/PlaybackEngines/AndroidPlayer/Unity.Android.GradleProject.dll"
 -r:"F:/UnityHub/Resources/2022.3.13f1/Editor/Data/PlaybackEngines/AndroidPlayer/Unity.Android.Types.dll"
+-r:"F:/UnityHub/Resources/2022.3.13f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll"
+-r:"F:/UnityHub/Resources/2022.3.13f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll"
 -r:"Library/PackageCache/com.unity.analytics@3.8.1/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll"
 -r:"Library/PackageCache/com.unity.analytics@3.8.1/Unity.Analytics.Editor.dll"
 -r:"Library/PackageCache/com.unity.analytics@3.8.1/Unity.Analytics.Tracker.dll"
@@ -384,10 +386,12 @@
 "Assets/_game/Script/Character's/Character.cs"
 "Assets/_game/Script/Character's/PlayerController.cs"
 "Assets/_game/Script/GameManager.cs"
+"Assets/_game/Script/GUI/PlayButton.cs"
 "Assets/_game/Script/LevelManager.cs"
-"Assets/_game/StateMachine/Character's/IdleState.cs"
-"Assets/_game/StateMachine/Character's/ISate.cs"
-"Assets/_game/StateMachine/Character's/RunningState.cs"
+"Assets/_game/StateMachine/Character's/IState.cs"
+"Assets/_game/StateMachine/Character's/PauseState.cs"
+"Assets/_game/StateMachine/Character's/PlayState.cs"
+"Assets/_game/StateMachine/Character's/StartState.cs"
 -langversion:9.0
 
 /deterministic

@@ -5,15 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static GameManager instance;
+    //invole the game manager to start the game
+    
+    private void Awake()
     {
-        SceneManager.LoadScene(sceneName:"Level1"); 
+        instance = this;
     }
-
-    // Update is called once per frame
+    // Start is called before the first frame update
     void Update()
     {
         
+    }
+    public void StartGame()
+    {
+        SceneManager.LoadScene(sceneName: "Level1");
     }
 }

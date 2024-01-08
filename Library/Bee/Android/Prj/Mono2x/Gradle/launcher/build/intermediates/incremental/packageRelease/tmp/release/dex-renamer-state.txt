@@ -1,4 +1,0 @@
-#Sun Jan 07 17:39:26 ICT 2024
-base.0=F\:\\Unity Project\\Bridge race\\Bridgerace\\Library\\Bee\\Android\\Prj\\Mono2x\\Gradle\\launcher\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes.dex
-renamed.0=classes.dex
-path.0=classes.dex

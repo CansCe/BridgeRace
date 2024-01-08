@@ -10,6 +10,7 @@ public class PlayerController : Character
     [SerializeField] GameObject brick;
     [SerializeField] Transform finishLine;
 
+    bool isWin = false;
     float speed = 15;
     int color = 1;
     int numberBrickCollected = 0;
@@ -22,12 +23,12 @@ public class PlayerController : Character
 
     void Update()
     {
-        Vector3 newpos = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
-        nexPosition = newpos;
-        if (newpos != Vector3.zero)
+        nexPosition = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
+        if (nexPosition != Vector3.zero)
         {
-            ChangeAnim("run");
-            transform.rotation = Quaternion.LookRotation(newpos);
+            if(!isWin)
+                ChangeAnim("run");
+            transform.rotation = Quaternion.LookRotation(nexPosition);
         }
         else
         {
@@ -101,9 +102,11 @@ public class PlayerController : Character
         }else
         if (other.gameObject.tag == "finish")
         {
+            isWin = true;
             Debug.Log("Reach Destination");
+            joystick.enabled = false;
             transform.position = Vector3.MoveTowards(transform.position, finishLine.position, 10 * Time.deltaTime);
-            ChangeAnim("victory");
+            ChangeAnim("win");
         }
         //if player hit the bot
         if(other.gameObject.tag=="Bot"){

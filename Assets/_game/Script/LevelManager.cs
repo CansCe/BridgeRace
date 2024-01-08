@@ -112,8 +112,7 @@ public class LevelManager : MonoBehaviour
         {
             for(int i = 0; i < takenBrickList.Count; i++)
             {
-                
-                int index = Random.Range(0,takenColor.Count);
+                int index = Random.Range(0, takenColor.Count-1);
                 int color = takenColor[index];
                 if (takenBrickList[i].y < 5)
                 {
@@ -124,7 +123,7 @@ public class LevelManager : MonoBehaviour
                     Instantiate(brickList[color], takenBrickList[i], Quaternion.identity, brickContainer[1]);
                 }
                 takenBrickList.RemoveAt(i);
-                takenColor.RemoveAt(color);
+                takenColor.RemoveAt(index);
             }
             return;
         }
