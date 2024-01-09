@@ -37,17 +37,17 @@ public class BotController : Character
 
     void pause()
     {
-        lastAgentDes = agent.destination;
         PauseAnim();
-        agent.velocity = Vector3.zero;
         agent.transform.position = transform.position;
+        agent.velocity = Vector3.zero;
         agent.ResetPath();
     }
 
     void resume()
     {
         //resume all 
-        agent.destination = GetClosestBrick(BrickContainer[currentFloor]).position;
+        //agent.destination = GetClosestBrick(BrickContainer[currentFloor]).position;
+        agent.SetDestination(lastAgentDes);
         ResumeAnim();
     }
 
@@ -139,6 +139,7 @@ public class BotController : Character
             Stop();
             Debug.Log("reach the destination");
             agent.SetDestination(finishLine.position);
+            lastAgentDes= finishLine.position;
             ChangeAnim("victory");
         }
     }
@@ -151,6 +152,7 @@ public class BotController : Character
         }
         Vector3 nextPos = GetClosestBrick(BrickContainer[currentFloor]).position;
         agent.destination = nextPos;
+        lastAgentDes = nextPos;
     }
     Transform GetClosestBrick(Transform Container)
     {

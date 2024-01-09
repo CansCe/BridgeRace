@@ -5,13 +5,16 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - BotController
     - Brick
+    - BrickPool
     - BridgeBrick
     - CameraScipt
     - FixedJoystick
-    - Floor1BrickPool
-    - Floor2BrickPool
+    - GameManager
     - LevelManager
+    - PauseButton
+    - PlayButton
     - PlayerController
+    - QuitButton
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
     - UnityEditor.Tilemaps.GridBrushEditor
@@ -34,13 +37,20 @@ ScriptsOnlyBuild:
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
+    Unity.TextMeshPro.dll:
+    - TMPro.TMP_FontAsset
+    - TMPro.TMP_Settings
+    - TMPro.TMP_SpriteAsset
+    - TMPro.TMP_StyleSheet
+    - TMPro.TextMeshProUGUI
+    Unity.Timeline.Editor.dll:
+    - TimelineProjectSettings
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
     - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateMachineInspector
     - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
@@ -50,6 +60,7 @@ ScriptsOnlyBuild:
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
+    - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
@@ -68,16 +79,81 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteCharacter
     - TMPro.TMP_SpriteGlyph
     - TMPro.TMP_Style
+    - TMPro.VertexGradient
     UnityEngine.CoreModule:
+    - UnityEngine.Events.ArgumentCache
     - UnityEngine.Events.PersistentCallGroup
+    - UnityEngine.Events.PersistentListenerMode
     UnityEngine.TextCoreFontEngineModule:
     - UnityEngine.TextCore.FaceInfo
     - UnityEngine.TextCore.Glyph
     - UnityEngine.TextCore.GlyphMetrics
     - UnityEngine.TextCore.GlyphRect
     UnityEngine.UI:
+    - UnityEngine.UI.AnimationTriggers
+    - UnityEngine.UI.Button/ButtonClickedEvent
+    - UnityEngine.UI.ColorBlock
     - UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
-  methodsToPreserve: []
+    - UnityEngine.UI.Navigation
+    - UnityEngine.UI.SpriteState
+  methodsToPreserve:
+  - assembly: Assembly-CSharp
+    fullTypeName: QuitButton
+    methodName: OnClick
+  - assembly: Assembly-CSharp
+    fullTypeName: GameManager
+    methodName: StartLevel1
+  - assembly: UnityEngine.CoreModule
+    fullTypeName: UnityEngine.GameObject
+    methodName: SetActive
+  - assembly: UnityEngine.CoreModule
+    fullTypeName: UnityEngine.GameObject
+    methodName: SetActive
+  - assembly: Assembly-CSharp
+    fullTypeName: GameManager
+    methodName: StartLevel2
+  - assembly: Assembly-CSharp
+    fullTypeName: PauseButton
+    methodName: OnClick
+  - assembly: Assembly-CSharp
+    fullTypeName: PauseButton
+    methodName: OnClick
+  - assembly: UnityEngine.CoreModule
+    fullTypeName: UnityEngine.GameObject
+    methodName: SetActive
+  - assembly: UnityEngine.CoreModule
+    fullTypeName: UnityEngine.GameObject
+    methodName: SetActive
+  - assembly: Assembly-CSharp
+    fullTypeName: QuitButton
+    methodName: OnClick
+  - assembly: UnityEngine.CoreModule
+    fullTypeName: UnityEngine.GameObject
+    methodName: SetActive
+  - assembly: UnityEngine.CoreModule
+    fullTypeName: UnityEngine.GameObject
+    methodName: SetActive
+  - assembly: UnityEngine.CoreModule
+    fullTypeName: UnityEngine.GameObject
+    methodName: SetActive
+  - assembly: UnityEngine.CoreModule
+    fullTypeName: UnityEngine.GameObject
+    methodName: SetActive
+  - assembly: Assembly-CSharp
+    fullTypeName: PauseButton
+    methodName: OnClick
+  - assembly: Assembly-CSharp
+    fullTypeName: QuitButton
+    methodName: OnClick
+  - assembly: Assembly-CSharp
+    fullTypeName: PauseButton
+    methodName: OnClick
+  - assembly: UnityEngine.CoreModule
+    fullTypeName: UnityEngine.GameObject
+    methodName: SetActive
+  - assembly: UnityEngine.CoreModule
+    fullTypeName: UnityEngine.GameObject
+    methodName: SetActive
   sceneClasses:
     Assets/_game/Prefabs/Scenes/Level1.unity:
     - Class: 1
@@ -97,8 +173,6 @@ ScriptsOnlyBuild:
     - Class: 43
       Script: {instanceID: 0}
     - Class: 48
-      Script: {instanceID: 0}
-    - Class: 49
       Script: {instanceID: 0}
     - Class: 54
       Script: {instanceID: 0}
@@ -121,45 +195,43 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 16702}
+      Script: {instanceID: 16704}
     - Class: 114
-      Script: {instanceID: 17056}
+      Script: {instanceID: 17058}
     - Class: 114
-      Script: {instanceID: 17400}
+      Script: {instanceID: 17402}
     - Class: 114
-      Script: {instanceID: 17418}
+      Script: {instanceID: 17420}
     - Class: 114
-      Script: {instanceID: 17560}
+      Script: {instanceID: 18048}
     - Class: 114
-      Script: {instanceID: 18044}
+      Script: {instanceID: 18086}
     - Class: 114
-      Script: {instanceID: 18080}
+      Script: {instanceID: 18244}
     - Class: 114
-      Script: {instanceID: 18238}
+      Script: {instanceID: 18316}
     - Class: 114
-      Script: {instanceID: 18552}
+      Script: {instanceID: 18558}
     - Class: 114
-      Script: {instanceID: 18844}
+      Script: {instanceID: 18628}
     - Class: 114
-      Script: {instanceID: 18996}
+      Script: {instanceID: 18854}
     - Class: 114
-      Script: {instanceID: 19290}
+      Script: {instanceID: 19006}
     - Class: 114
-      Script: {instanceID: 19298}
+      Script: {instanceID: 19026}
     - Class: 114
-      Script: {instanceID: 19516}
+      Script: {instanceID: 19304}
     - Class: 114
-      Script: {instanceID: 19808}
+      Script: {instanceID: 19312}
     - Class: 114
-      Script: {instanceID: 20540}
+      Script: {instanceID: 19476}
     - Class: 114
-      Script: {instanceID: 20968}
+      Script: {instanceID: 19532}
     - Class: 114
-      Script: {instanceID: 27454}
+      Script: {instanceID: 19824}
     - Class: 114
-      Script: {instanceID: 30136}
-    - Class: 114
-      Script: {instanceID: 30146}
+      Script: {instanceID: 31756}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -184,6 +256,186 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 238
       Script: {instanceID: 0}
+    Assets/_game/Prefabs/Scenes/Level2.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 23
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 33
+      Script: {instanceID: 0}
+    - Class: 43
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 54
+      Script: {instanceID: 0}
+    - Class: 65
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
+    - Class: 90
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 16704}
+    - Class: 114
+      Script: {instanceID: 17058}
+    - Class: 114
+      Script: {instanceID: 17402}
+    - Class: 114
+      Script: {instanceID: 17420}
+    - Class: 114
+      Script: {instanceID: 18048}
+    - Class: 114
+      Script: {instanceID: 18086}
+    - Class: 114
+      Script: {instanceID: 18244}
+    - Class: 114
+      Script: {instanceID: 18316}
+    - Class: 114
+      Script: {instanceID: 18558}
+    - Class: 114
+      Script: {instanceID: 18628}
+    - Class: 114
+      Script: {instanceID: 18854}
+    - Class: 114
+      Script: {instanceID: 19006}
+    - Class: 114
+      Script: {instanceID: 19026}
+    - Class: 114
+      Script: {instanceID: 19304}
+    - Class: 114
+      Script: {instanceID: 19312}
+    - Class: 114
+      Script: {instanceID: 19476}
+    - Class: 114
+      Script: {instanceID: 19532}
+    - Class: 114
+      Script: {instanceID: 19824}
+    - Class: 114
+      Script: {instanceID: 31756}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 136
+      Script: {instanceID: 0}
+    - Class: 137
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 195
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 238
+      Script: {instanceID: 0}
+    Assets/_game/Prefabs/Scenes/StartGameScene.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 23
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 33
+      Script: {instanceID: 0}
+    - Class: 43
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 49
+      Script: {instanceID: 0}
+    - Class: 54
+      Script: {instanceID: 0}
+    - Class: 65
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 16704}
+    - Class: 114
+      Script: {instanceID: 17058}
+    - Class: 114
+      Script: {instanceID: 17562}
+    - Class: 114
+      Script: {instanceID: 18048}
+    - Class: 114
+      Script: {instanceID: 18244}
+    - Class: 114
+      Script: {instanceID: 18316}
+    - Class: 114
+      Script: {instanceID: 18558}
+    - Class: 114
+      Script: {instanceID: 18854}
+    - Class: 114
+      Script: {instanceID: 19026}
+    - Class: 114
+      Script: {instanceID: 19054}
+    - Class: 114
+      Script: {instanceID: 19442}
+    - Class: 114
+      Script: {instanceID: 20414}
+    - Class: 114
+      Script: {instanceID: 20562}
+    - Class: 114
+      Script: {instanceID: 20990}
+    - Class: 114
+      Script: {instanceID: 31756}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
   scriptHashData:
   - hash:
       serializedVersion: 2
@@ -197,6 +449,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.SpatialTracking
     namespaceName: UnityEngine.SpatialTracking
     className: TrackedPoseDriver
+  - hash:
+      serializedVersion: 2
+      Hash: bb54e877aa7a7c168f8b907fb732b5a9
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: Guner
   - hash:
       serializedVersion: 2
       Hash: 751e5bae2a317288c2ab58d66687092b
@@ -355,6 +613,12 @@ ScriptsOnlyBuild:
     className: PlaymodeTestsController
   - hash:
       serializedVersion: 2
+      Hash: 3e4df82f431a2103337e230011dd3caf
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: GameUnit
+  - hash:
+      serializedVersion: 2
       Hash: 6f67dd406ddfc18c9b3f8a90725c6266
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
@@ -445,6 +709,12 @@ ScriptsOnlyBuild:
     className: TMP_SelectionCaret
   - hash:
       serializedVersion: 2
+      Hash: 1713a8c50ffadfe01a23c0c5bbd7ab27
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: BrickPool
+  - hash:
+      serializedVersion: 2
       Hash: be8b55fc8a992741c6269f20cbc719b1
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
@@ -467,6 +737,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: JoystickSetterExample
+  - hash:
+      serializedVersion: 2
+      Hash: ee5ca583d5b2932501cb1c2e81042ad0
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: PoolControler
   - hash:
       serializedVersion: 2
       Hash: 751d867553f413cde86fe5db0b02780d
@@ -521,6 +797,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
     className: Button
+  - hash:
+      serializedVersion: 2
+      Hash: d0fd6d403279da41eb4d383a8df0d5bf
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: Bullet
   - hash:
       serializedVersion: 2
       Hash: 757aa3123742691999f13bf0e34b98ee
@@ -581,6 +863,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
     className: VerticalLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: 8f6d2f9c611822d0b4befdfa153f3d03
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: PauseButton
   - hash:
       serializedVersion: 2
       Hash: 751e5bae2a317288c2ab58d66687092b
@@ -757,6 +1045,12 @@ ScriptsOnlyBuild:
     className: PauseState
   - hash:
       serializedVersion: 2
+      Hash: 751e5bae2a317288c2ab58d66687092b
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: BackBrick
+  - hash:
+      serializedVersion: 2
       Hash: 2b006c27b595e55e112de0e713333574
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
@@ -767,12 +1061,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro
     namespaceName: TMPro
     className: TMP_Settings
-  - hash:
-      serializedVersion: 2
-      Hash: 751e5bae2a317288c2ab58d66687092b
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: IState
   - hash:
       serializedVersion: 2
       Hash: 92e4eb637d90a10cbf7a27b5cc0a5f85
@@ -871,47 +1159,13 @@ ScriptsOnlyBuild:
     className: NavMeshLink
   - hash:
       serializedVersion: 2
-      Hash: 3e4df82f431a2103337e230011dd3caf
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: GameUnit
-  - hash:
-      serializedVersion: 2
-      Hash: ee5ca583d5b2932501cb1c2e81042ad0
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: PoolControler
-  - hash:
-      serializedVersion: 2
-      Hash: bb54e877aa7a7c168f8b907fb732b5a9
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: Guner
-  - hash:
-      serializedVersion: 2
-      Hash: d0fd6d403279da41eb4d383a8df0d5bf
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: Bullet
-  - hash:
-      serializedVersion: 2
-      Hash: e73add957d8b0f1fe1639eac8ff57a3d
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: Floor1BrickPool
-  - hash:
-      serializedVersion: 2
-      Hash: e73add957d8b0f1fe1639eac8ff57a3d
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: Floor2BrickPool
-  - hash:
-      serializedVersion: 2
       Hash: 751e5bae2a317288c2ab58d66687092b
     assemblyName: Assembly-CSharp
     namespaceName: 
-    className: BackBrick
+    className: QuitButton
   platform: 13
   scenePathNames:
+  - Assets/_game/Prefabs/Scenes/StartGameScene.unity
   - Assets/_game/Prefabs/Scenes/Level1.unity
-  playerPath: F:/Unity Project/Bridge race/Bridgerace/Output/Test1.aab
+  - Assets/_game/Prefabs/Scenes/Level2.unity
+  playerPath: F:/Unity Project/Bridge race/Bridgerace/Output

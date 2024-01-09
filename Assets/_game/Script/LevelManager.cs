@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -10,11 +11,13 @@ public class LevelManager : MonoBehaviour
     [SerializeField] Transform[] bridges;
     [SerializeField] Transform[] brickContainer ;
     [SerializeField] Transform[] Origins;
+    
     int takenBrickFloor1 = 0; 
     int takenBrickFloor2 = 0; 
+    int takenBrickFloor3 = 0; 
     List<int> takenColor = new List<int>();
     Transform bridgeContainer;
-
+    
     public static LevelManager instance;
     
     private void Start()
@@ -49,10 +52,7 @@ public class LevelManager : MonoBehaviour
                 GameObject clone = Instantiate(brick,newpos, Quaternion.identity,Parent);
                 clone.GetComponent<Brick>().SetColor(queque);
                 countTheBrickNumber++;
-                if(origin.y <15)
-                    Floor1BrickPool.instance.AddToThePool(clone);
-                else
-                    Floor2BrickPool.instance.AddToThePool(clone);
+                BrickPool.instance.AddToThePool(clone);
             }
         }
     }
@@ -113,6 +113,9 @@ public class LevelManager : MonoBehaviour
             case 1:
                 takenBrickFloor2++;
                 break;
+            case 3:
+                takenBrickFloor3++;
+                break;
         }
     }
     //respawn the taken brick
@@ -122,7 +125,7 @@ public class LevelManager : MonoBehaviour
         {
             int rand = Random.Range(0, takenColor.Count);
             int color = takenColor[rand];            
-            GameObject Clone = Floor1BrickPool.instance.GetPooledBrick();
+            GameObject Clone = BrickPool.instance.GetPooledBrick();
             Clone.SetActive(true);
             Clone.GetComponent<Brick>().SetColor(color);
             takenColor.RemoveAt(rand);
@@ -132,11 +135,21 @@ public class LevelManager : MonoBehaviour
         {
             int rand = Random.Range(0, takenColor.Count);
             int color = takenColor[rand];
-            GameObject Clone = Floor2BrickPool.instance.GetPooledBrick();
+            GameObject Clone = BrickPool.instance.GetPooledBrick();
             Clone.SetActive(true);
             Clone.GetComponent<Brick>().SetColor(color);
             takenColor.RemoveAt(rand);
             takenBrickFloor2--;
+        }
+        if(takenBrickFloor3 >= 15)
+        {
+            int rand = Random.Range(0, takenColor.Count);
+            int color = takenColor[rand];
+            GameObject Clone = BrickPool.instance.GetPooledBrick();
+            Clone.SetActive(true);
+            Clone.GetComponent<Brick>().SetColor(color);
+            takenColor.RemoveAt(rand);
+            takenBrickFloor3--;
         }
     }
 }
