@@ -31,9 +31,26 @@ public class Character : MonoBehaviour
         }
     }
 
+    protected void PauseAnim()
+    {
+        anim.speed = 0;
+    }
+    protected void ResumeAnim()
+    {
+        anim.speed = 1;
+    }
+
     protected virtual void OnGameStateChanged(IState newGameState)
     {
         Debug.Log("Player unable");
         enabled = newGameState == IState.Start;
+        if(!enabled)
+        {
+            PauseAnim();
+        }
+        else
+        {
+            ResumeAnim();
+        }
     }
 }

@@ -21,7 +21,8 @@ public class BotController : Character
     public Transform[] BrickContainer = new Transform[2];
     public int currentFloor = 0;
 
-
+    //velocity and path of the agent before pausing
+    Vector3 lastAgentDes;
 
     protected override void OnDestroy()
     {
@@ -32,7 +33,22 @@ public class BotController : Character
         targetNumBrick = Random.Range(10, 20);
         StartCollectBrick();
         StateManager.instance.OnGameStateChanged += OnGameStateChanged;
+    }
 
+    void pause()
+    {
+        lastAgentDes = agent.destination;
+        PauseAnim();
+        agent.velocity = Vector3.zero;
+        agent.transform.position = transform.position;
+        agent.ResetPath();
+    }
+
+    void resume()
+    {
+        //resume all 
+        agent.destination = GetClosestBrick(BrickContainer[currentFloor]).position;
+        ResumeAnim();
     }
 
     void Update()
@@ -41,10 +57,8 @@ public class BotController : Character
         {
             ChangeAnim("run");
         }
-        else
-        {
+        if (agent.velocity == Vector3.zero && agent.destination == null)
             ChangeAnim("idle");
-        }
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 100))
         {
@@ -185,6 +199,13 @@ public class BotController : Character
     protected override void OnGameStateChanged(IState newGameState)
     {
         Debug.Log("Player unable");
-        enabled = newGameState == IState.Start;
+        if(newGameState == IState.Start)
+        {
+            resume();
+        }
+        else
+        {
+            pause();
+        }
     }
 }
