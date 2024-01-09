@@ -26,4 +26,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneName: "Level2");
     }
 
+    [System.Obsolete]
+    public void Reload()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.UnloadScene(scene.name);
+        SceneManager.LoadScene(scene.name);
+    }
 }

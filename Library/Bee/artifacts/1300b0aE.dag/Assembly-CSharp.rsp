@@ -391,6 +391,7 @@
 "Assets/_game/Script/GUI/PauseButton.cs"
 "Assets/_game/Script/GUI/PlayButton.cs"
 "Assets/_game/Script/GUI/QuitButton.cs"
+"Assets/_game/Script/GUI/RestartButton.cs"
 "Assets/_game/Script/LevelManager.cs"
 "Assets/_game/StateMachine/Character's/IState.cs"
 "Assets/_game/StateMachine/Character's/PauseState.cs"

@@ -71,6 +71,7 @@
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
     <Compile Include="Assets\_game\Script\GUI\PauseButton.cs" />
     <Compile Include="Assets\_Pool\Pool\PoolControler.cs" />
+    <Compile Include="Assets\_game\Script\GUI\RestartButton.cs" />
     <Compile Include="Assets\_game\StateMachine\Character&apos;s\PauseState.cs" />
     <Compile Include="Assets\_Pool\Pool\SimplePool.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />

@@ -30,7 +30,7 @@ public class Character : MonoBehaviour
             anim.SetTrigger(currentAnim);
         }
     }
-
+    
     protected void PauseAnim()
     {
         anim.speed = 0;
