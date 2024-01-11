@@ -13,12 +13,11 @@ public class BotController : Character
     [SerializeField] Transform finishLine;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Rigidbody rb;
-    
+
 
     int numberBrickCollected = 0;
     int targetNumBrick;
     public int color;
-    public Transform[] BrickContainer = new Transform[2];
     public int currentFloor = 0;
 
     //velocity and path of the agent before pausing
@@ -33,6 +32,7 @@ public class BotController : Character
         targetNumBrick = Random.Range(10, 20);
         StartCollectBrick();
         StateManager.instance.OnGameStateChanged += OnGameStateChanged;
+        DontDestroyOnLoad(agent);
     }
 
     void pause()
@@ -48,6 +48,7 @@ public class BotController : Character
         //resume all 
         //agent.destination = GetClosestBrick(BrickContainer[currentFloor]).position;
         agent.SetDestination(lastAgentDes);
+
         ResumeAnim();
     }
 
@@ -146,11 +147,11 @@ public class BotController : Character
     //wait till the bot reach the destination
     void StartCollectBrick()
     {
-        if (BrickContainer[currentFloor] == null)
+        if (LevelManager.instance.brickContainer[currentFloor] == null)
         {
             return;
         }
-        Vector3 nextPos = GetClosestBrick(BrickContainer[currentFloor]).position;
+        Vector3 nextPos = GetClosestBrick(LevelManager.instance.brickContainer[currentFloor]).position;
         agent.destination = nextPos;
         lastAgentDes = nextPos;
     }
@@ -200,7 +201,6 @@ public class BotController : Character
 
     protected override void OnGameStateChanged(IState newGameState)
     {
-        Debug.Log("Player unable");
         if(newGameState == IState.Start)
         {
             resume();
@@ -209,5 +209,19 @@ public class BotController : Character
         {
             pause();
         }
+    }
+
+    public void resest()
+    {
+        numberBrickCollected = 0;
+        for (int i = 0; i < backBrickContainer.transform.childCount; i++)
+        {
+            Destroy(backBrickContainer.transform.GetChild(i).gameObject);
+        }
+        //re-update the brick container
+        
+        rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+        agent.destination = destination.position;
     }
 }

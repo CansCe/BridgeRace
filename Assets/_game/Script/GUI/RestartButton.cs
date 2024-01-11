@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class RestartButton : MonoBehaviour
 {
+    [SerializeField] GameObject pauseCanvas;
     [System.Obsolete]
     public void OnClick()
     {
         StateManager.instance.SetState(IState.Start);
-        GameManager.instance.Reload();
-        //change game state to play
+        LevelManager.instance.ResetLevel();
     }
 }

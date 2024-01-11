@@ -227,10 +227,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 4750512765095842059}
   rb: {fileID: 2946277867874067506}
-  joystick: {fileID: 0}
   backBrickContainer: {fileID: 6673516442784928971}
   brick: {fileID: 8357769269727424248, guid: 600746b18c831bf428b4a76718311d74, type: 3}
-  finishLine: {fileID: 0}
+  finishLine: {fileID: 7734580931192353964, guid: 8dcd3b3a68578c74b888e5c5c5110c89, type: 3}
+  joystick: {fileID: 0}
 --- !u!1001 &1819459423067411277
 PrefabInstance:
   m_ObjectHideFlags: 0

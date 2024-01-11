@@ -195,14 +195,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f7f24409a999548a13650b5493792f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 8408133812419366201}
   backBrickContainer: {fileID: 8747922665473949653}
   brick: {fileID: 7077293999271896615, guid: 78d512cb8635f44498191e263a60df54, type: 3}
-  destination: {fileID: 0}
-  BrickContainer:
-  - {fileID: 0}
-  - {fileID: 0}
+  destination: {fileID: 5250472905158314966, guid: 5f51a22ae160be6468a0fc6053b3d6eb, type: 3}
+  finishLine: {fileID: 3307663034218795125, guid: 9567dbcaac41a604487e4a46f2e62a3e, type: 3}
   agent: {fileID: 3710418574323068196}
   rb: {fileID: 354057149820208064}
+  brickContainer:
+  - {fileID: 1132497998733189891, guid: 390ccd9b06365674899045c6bfe3531d, type: 3}
+  - {fileID: 5324654916775022127, guid: 30e67c151374f8d408dd364a60e41fc4, type: 3}
   color: 2
   currentFloor: 0
 --- !u!1 &8747922665473949653

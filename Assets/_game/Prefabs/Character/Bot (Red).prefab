@@ -226,12 +226,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f7f24409a999548a13650b5493792f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 6447885603861939047}
   backBrickContainer: {fileID: 4243895284723160501}
   brick: {fileID: 2469642987987845764, guid: d4b3a2afee993404f8a3bf21d3f67d51, type: 3}
-  destination: {fileID: 0}
-  BrickContainer:
-  - {fileID: 0}
-  - {fileID: 0}
+  destination: {fileID: 5250472905158314966, guid: 5f51a22ae160be6468a0fc6053b3d6eb, type: 3}
+  finishLine: {fileID: 5975549798135217787, guid: b22a503ada851a14ba006191d7ea6cde, type: 3}
   agent: {fileID: 1301842573066850416}
   rb: {fileID: 1404675097855618757}
   color: 0

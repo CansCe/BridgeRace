@@ -30,4 +30,13 @@ public class BrickPool : MonoBehaviour
             return pooledObjects[rand];
         }
     }
+
+    public void ResetBrick()
+    {
+        //make all the brick inactive active again 
+        for (int i = 0; i < pooledObjects.Count; i++)
+        {
+            pooledObjects[i].SetActive(true);
+        }
+    }
 }

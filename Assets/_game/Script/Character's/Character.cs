@@ -6,6 +6,8 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     protected Character _instance;
+    public Animator anim;
+    private string currentAnim;
 
     private void Awake()
     {
@@ -18,8 +20,10 @@ public class Character : MonoBehaviour
         StateManager.instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
-    public Animator anim;
-    private string currentAnim;
+    private void Start()
+    {
+        DontDestroyOnLoad(anim);
+    }
     public void ChangeAnim(string animName)
     {
         if(currentAnim != animName)
@@ -33,16 +37,23 @@ public class Character : MonoBehaviour
     
     protected void PauseAnim()
     {
+        if (anim == null)
+        {
+            return;
+        }
         anim.speed = 0;
     }
     protected void ResumeAnim()
     {
+        if (anim == null)
+        {
+            return;
+        }
         anim.speed = 1;
     }
 
     protected virtual void OnGameStateChanged(IState newGameState)
     {
-        Debug.Log("Player unable");
         enabled = newGameState == IState.Start;
         if(!enabled)
         {

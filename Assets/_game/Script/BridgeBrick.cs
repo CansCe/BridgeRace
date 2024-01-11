@@ -32,4 +32,12 @@ public class BridgeBrick : MonoBehaviour
             return;
         }
     }
+
+    public void Reset()
+    {
+        GetComponent<MeshRenderer>().enabled = false;
+        Debug.Log(Equals(gameObject.GetComponent<MeshRenderer>().enabled));
+        canBePlace = true;
+        color = 5;
+    }
 }

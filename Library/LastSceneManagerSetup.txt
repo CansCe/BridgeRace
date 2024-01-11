@@ -1,13 +1,5 @@
 sceneSetups:
-- path: Assets/_game/Prefabs/Scenes/Level2.unity
-  isLoaded: 0
-  isActive: 0
-  isSubScene: 0
 - path: Assets/_game/Prefabs/Scenes/Level1.unity
-  isLoaded: 0
-  isActive: 0
-  isSubScene: 0
-- path: Assets/_game/Prefabs/Scenes/StartGameScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

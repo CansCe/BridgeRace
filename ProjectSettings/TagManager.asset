@@ -13,6 +13,12 @@ TagManager:
   - Bridge
   - Floor2a
   - Floor2b
+  - Floor3
+  - Floor2
+  - Floor1Brick
+  - Floor2Brick
+  - Floor3Brick
+  - JoyStick
   layers:
   - Default
   - TransparentFX

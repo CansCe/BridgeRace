@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerController : Character
 {
     [SerializeField] Rigidbody rb;
-    [SerializeField] FixedJoystick joystick;
     [SerializeField] GameObject backBrickContainer;
     [SerializeField] GameObject brick;
     [SerializeField] Transform finishLine;
 
+    public FixedJoystick joystick;
     bool isWin = false;
     float speed = 15;
     int color = 1;
@@ -18,7 +18,7 @@ public class PlayerController : Character
     int currentFloor;
     void Start()
     {
-        
+        joystick = FindAnyObjectByType<FixedJoystick>();
     }
 
     void Update()
@@ -149,6 +149,23 @@ public class PlayerController : Character
         {
             rb.constraints = RigidbodyConstraints.None;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
+        }
+    }
+
+    public void reload()
+    {
+        isWin = false;
+        joystick.enabled = true;
+        transform.position = new Vector3(37, 1.5f, 1);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        numberBrickCollected = 0;
+        rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+        ChangeAnim("idle");
+        //reset back brick
+        for (int i = 0; i < backBrickContainer.transform.childCount; i++)
+        {
+            Destroy(backBrickContainer.transform.GetChild(i).gameObject);
         }
     }
 }

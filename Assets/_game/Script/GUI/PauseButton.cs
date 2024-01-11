@@ -14,7 +14,6 @@ public class PauseButton : MonoBehaviour
     {
         IState currentState = StateManager.instance.CurrentGameState;
         IState newGameState = currentState == IState.Start ? IState.Pause : IState.Start;
-        Debug.Log("Player pressed pause");
         StateManager.instance.SetState(newGameState);
         if (pause != null)
             pause.active = !pause.activeInHierarchy;

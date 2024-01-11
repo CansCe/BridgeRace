@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FixedJoystick.cs" />
+    <Compile Include="Assets\GUI PRO Kit - Casual Game\Scripts\PanelControlCasualGame.cs" />
+    <Compile Include="Assets\_game\Script\GUI\MainMenuReturn.cs" />
     <Compile Include="Assets\_game\StateMachine\Character&apos;s\StateManager.cs" />
     <Compile Include="Assets\_game\Script\Character&apos;s\Character.cs" />
     <Compile Include="Assets\_Pool\Pool\ParticlePool.cs" />
@@ -87,20 +89,24 @@
     <Compile Include="Assets\_Pool\Pool\GameUnit.cs" />
     <Compile Include="Assets\_game\Script\BrickPool.cs" />
     <Compile Include="Assets\_Pool\Guner.cs" />
+    <Compile Include="Assets\GUI PRO Kit - Casual Game\Scripts\PanelCasualGame.cs" />
     <Compile Include="Assets\_game\Script\Brick.cs" />
     <Compile Include="Assets\_Pool\Pool\MiniPool.cs" />
     <Compile Include="Assets\_game\Script\Character&apos;s\BotController.cs" />
     <Compile Include="Assets\_game\Script\GameManager.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickPlayerExample.cs" />
+    <Compile Include="Assets\GUI PRO Kit - Casual Game\Extensions\UIParticle\UIParticleSystem.cs" />
     <Compile Include="Assets\_game\StateMachine\Character&apos;s\PlayState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\GUI PRO Kit - Casual Game\Extensions\UIParticle\hidden particle.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\GUI PRO Kit - Casual Game\ResourcesData\Shader &amp; Materials\UIAdditive.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
@@ -111,6 +117,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\_Pool\ReadMe.txt" />
+    <None Include="Assets\GUI PRO Kit - Casual Game\ResourcesData\Shader &amp; Materials\MobileAdditive.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />

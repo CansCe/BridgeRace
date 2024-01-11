@@ -9,33 +9,56 @@ public class LevelManager : MonoBehaviour
     [SerializeField] GameObject brick;
     [SerializeField] GameObject bridge;
     [SerializeField] Transform[] bridges;
-    [SerializeField] Transform[] brickContainer ;
     [SerializeField] Transform[] Origins;
+    [SerializeField] Transform bridgeContainer;
     
+    public GameObject[] floors;
+    public GameObject[] bots;
+    public GameObject player;
+    public Transform[] brickContainer;
     int takenBrickFloor1 = 0; 
     int takenBrickFloor2 = 0; 
-    int takenBrickFloor3 = 0; 
+    int takenBrickFloor3 = 0;
     List<int> takenColor = new List<int>();
-    Transform bridgeContainer;
-    
+    int timesload = 0;
     public static LevelManager instance;
     
     private void Start()
     {
-        instance = this;
-        for(int i=0; i<Origins.Length; i++)
+        instance = this;   
+    }
+    public void OnInit()
+    {
+        if (timesload > 0)
+        {
+            //reset player and bots only
+            ResetLevel();
+            return;
+        }
+        for (int i = 0; i < Origins.Length; i++)
         {
             PlaceBrick(Origins[i].position, brickContainer[i]);
         }
-        for(int i=0; i<bridges.Length; i++)
+        for (int i = 0; i < bridges.Length; i++)
         {
             SpawnBridge(bridges[i].position);
         }
+        Instantiate(player, new Vector3(39, 1.5f, 1), Quaternion.identity);
+        float x = 7;
+        for (int i = 0; i < bots.Length; i++)
+        {
+            Instantiate(bots[i], new Vector3(x, 1.5f, 1), Quaternion.identity);
+            x += 5;
+        }
+        timesload++;
+
     }
+
     private void Update()
     {
         RespawnTakenBrick();
     }
+    
     //spawn the brick on the floor
     private void PlaceBrick(Vector3 origin,Transform Parent)
     {
@@ -150,6 +173,33 @@ public class LevelManager : MonoBehaviour
             Clone.GetComponent<Brick>().SetColor(color);
             takenColor.RemoveAt(rand);
             takenBrickFloor3--;
+        }
+    }
+
+    public void ResetLevel()
+    {
+        //changestate
+        StateManager.instance.SetState(IState.Start);
+        //move all bot to start position
+        GameObject[] bots = GameObject.FindGameObjectsWithTag("Bot");
+        for(int i=0; i<bots.Length; i++)
+        {
+            bots[i].transform.position = new Vector3(7 + (i * 5), 1.5f, 1);
+            bots[i].GetComponent<BotController>().resest();
+        }
+        //move player to start
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().reload();
+        //reset the brick
+        BrickPool.instance.ResetBrick();
+        takenBrickFloor1 = 0;
+        takenBrickFloor2 = 0;
+        takenBrickFloor3 = 0;
+        takenColor.Clear();
+        //reset the bridge
+        //destroy all child in the bridge container
+        foreach (Transform child in bridgeContainer)
+        {
+            child.GetComponent<BridgeBrick>().Reset();
         }
     }
 }
