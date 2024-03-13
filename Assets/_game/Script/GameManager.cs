@@ -1,13 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager instance;
     //invole the game manager to start the game
     
@@ -28,7 +26,7 @@ public class GameManager : MonoBehaviour
     }
     public void StartLevel2()
     {
-        SceneManager.LoadScene(sceneName: "Level2");
+        SceneManager.LoadScene("Level2");
     }
 
     [System.Obsolete]

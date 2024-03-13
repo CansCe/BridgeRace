@@ -53,7 +53,6 @@ public class LevelManager : MonoBehaviour
         timesload++;
 
     }
-
     private void Update()
     {
         RespawnTakenBrick();

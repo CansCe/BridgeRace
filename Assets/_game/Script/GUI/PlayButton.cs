@@ -9,8 +9,6 @@ public class PlayButton : MonoBehaviour
    public void PlayGame()
    {
         Debug.Log("Clicked");
-        //GameManager.instance.StartGame();
-        //Disable the current canvas
         canvas.enabled = false;
     }
 }
